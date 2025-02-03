@@ -8,12 +8,12 @@ pipeline {
         }
         stage("Install node modules") { 
             steps {
-                 npm install
+                 sh 'npm install'
             }
         }
         stage('Build') { 
             steps {
-                npm run build --prod
+                sh 'npm run build --prod'
             }
         }
         stage('Deploy') { 
