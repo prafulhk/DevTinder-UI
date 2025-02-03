@@ -13,7 +13,7 @@ pipeline {
         stage('Build and publish') {
             steps {
                 sh 'npm install'
-                sh 'npm run mg -- build --aot --output-hashing=all'
+                sh 'npm run ng -- build --aot --output-hashing=all'
             }
         }
     }
