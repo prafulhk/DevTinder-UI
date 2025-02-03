@@ -12,7 +12,6 @@ pipeline {
 
         stage('Build and publish') {
             steps {
-                sh 'npm install'
                 sh 'npm run ng -- build --aot --output-hashing=all'
             }
         }
