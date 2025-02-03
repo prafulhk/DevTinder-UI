@@ -12,7 +12,7 @@ pipeline {
 
         stage('Build and publish') {
             steps {
-                sh 'npm run build'
+                sh 'ng build --configuration production'
             }
         }
     }
