@@ -10,10 +10,10 @@ pipeline {
             }
         }
 
-        stage('Build Angular App') {
+        stage('Build and publish') {
             steps {
-                // Build the Angular app
-                sh 'npm run build'
+                sh 'npm install'
+                sh 'npm run mg -- build --aot --output-hashing=all'
             }
         }
     }
