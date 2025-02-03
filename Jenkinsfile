@@ -1,21 +1,33 @@
 pipeline {
+
     agent any
-    tools {nodejs "nodejs"}
 
     stages {
+
         stage('Checkout') {
+
             steps {
-                // Check out the source code from your repository
-                checkout scm
+
+                git branch: 'dev_tinder', url: 'https://github.com/prafulhk/DevTinder-UI.git' 
+
             }
+
         }
 
-        stage('Build and publish') {
+        stage('Build Angular') {
+
             steps {
-                sh 'npm install'
-                sh 'npm run ng -- build --aot --output-hashing=all'
+
+                dir('/home/ubuntu/DevTinder-UI') { // Navigate to the Angular project directory
+
+                    sh 'npm run build --prod'
+
+                }
+
             }
+
         }
+
     }
 
 }
