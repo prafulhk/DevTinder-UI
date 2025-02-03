@@ -16,10 +16,5 @@ pipeline {
                 sh 'npm run build --prod'
             }
         }
-        stage('Deploy') { 
-            steps {
-                //
-            }
-        }
     }
 }
