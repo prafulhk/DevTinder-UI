@@ -20,7 +20,7 @@ pipeline {
 
                 dir('/home/ubuntu/DevTinder-UI') { // Navigate to the Angular project directory
 
-                    sh 'npm run build --prod'
+                    sh 'sudo npm run build --prod'
 
                 }
 
