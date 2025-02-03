@@ -1,20 +1,27 @@
 pipeline {
-    agent any 
+    agent any
+
     stages {
-        stage("Checkout SCM") { 
+        stage('Checkout') {
             steps {
-                 git branch:'dev_tinder' ,url:'https://github.com/prafulhk/DevTinder-UI.git'
+                // Check out the source code from your repository
+                checkout scm
             }
         }
-        stage("Install node modules") { 
+
+        stage('Install Dependencies') {
             steps {
-                 sh 'npm install'
+                // Use Node.js and npm installed on the Jenkins agent
+                sh 'npm install'
             }
         }
-        stage('Build') { 
+
+        stage('Build Angular App') {
             steps {
-                sh 'npm run build --prod'
+                // Build the Angular app
+                sh 'npm run build'
             }
         }
     }
+
 }
