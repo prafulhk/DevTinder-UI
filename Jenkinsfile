@@ -12,7 +12,7 @@ pipeline {
 
         stage('Build and publish') {
             steps {
-                sh 'sudo npm run build'
+                sh 'npm run build'
             }
         }
     }
