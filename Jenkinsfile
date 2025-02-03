@@ -10,13 +10,6 @@ pipeline {
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                // Use Node.js and npm installed on the Jenkins agent
-                sh 'npm install'
-            }
-        }
-
         stage('Build Angular App') {
             steps {
                 // Build the Angular app
