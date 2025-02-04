@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
-    private baseUrl: string = "http://65.1.91.43:3000";
+    private baseUrl: string = "http://13.201.137.54:3000";
     constructor(private http: HttpClient) { }
 
     login(body: any): Observable<any> {
