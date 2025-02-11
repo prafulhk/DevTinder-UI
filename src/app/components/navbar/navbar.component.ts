@@ -1,12 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loggedInUser } from '../../store/login.selectors';
 import { Observable } from 'rxjs';
-import { ConfigService } from '../../config/config.service';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-// import { LoginActions } from '../../store/login.actions';
-import { LoginComponent } from '../login/login.component';
-import { LoginLogoutActions } from '../../store/login.actions';
+import { Router, RouterLink } from '@angular/router';
+import { LoginComponent } from '../lgoin/login.component';
+import { loggedInUser } from '../../store/user/user.selectors';
+import { ConnectionActions, UserActions } from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +16,6 @@ export class NavbarComponent implements OnInit {
   store = inject(Store);
   user:Observable<any> = this.store.select(loggedInUser);
   loggedInuserDetails:any;
-  private ConfigService = inject(ConfigService);
   private router = inject(Router);
 
   ngOnInit() {
@@ -28,9 +25,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  connections(){
+    this.store.dispatch(ConnectionActions.addConnections())
+  }
 
   logout(){
-    this.store.dispatch(LoginLogoutActions.removeUser(this.loggedInuserDetails));
+    this.store.dispatch(UserActions.removeUser(this.loggedInuserDetails));
     this.router.navigateByUrl('login');
   }
 

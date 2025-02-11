@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { FeedComponent } from './components/feed/feed.component';
-import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UpdateProfileComponent } from './components/update-profile/update-profile.component';
+import { LoginComponent } from './components/lgoin/login.component';
+import { ConnectionsComponent } from './components/connections/connections.component';
 
 export const routes: Routes = [
     {
@@ -19,6 +20,9 @@ export const routes: Routes = [
     },
     {
         path: "profileUpdate", component: UpdateProfileComponent
+    },
+    {
+        path: "connections", component: ConnectionsComponent
     },
 
 ];

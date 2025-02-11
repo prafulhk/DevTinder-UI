@@ -5,7 +5,7 @@ import { FeedComponent } from './components/feed/feed.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,NavbarComponent,FeedComponent],
+  imports: [RouterOutlet,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

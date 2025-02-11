@@ -4,17 +4,25 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ConfigService {
-    localBaseURL: string = "http://localhost:3000";
+    localBaseURL: string = "http://localhost:3001";
     deployedBaseURL: string = "http://13.201.137.54:3000";
 
     private baseUrl: string = this.localBaseURL;
     constructor(private http: HttpClient) { }
 
     login(emailId: string, password: string): Observable<any> {
-        return this.http.post(this.baseUrl + "/login", { emailId, password });        
+        return this.http.post(this.baseUrl + "/login", { emailId, password });
     }
 
-    logout(emailId: string): Observable<any>{
-        return this.http.post(this.baseUrl + "/logout",{emailId});        
+    logout(emailId: string): Observable<any> {
+        return this.http.post(this.baseUrl + "/logout", { emailId });
+    }
+
+    updateProfile(userId: string, firstName: string, lastName: string, sex: string, dob: string): Observable<any> {
+        return this.http.patch(this.baseUrl + "/user/profile/update", { userId, firstName, lastName, sex, dob });
+    }
+
+    fetchConnections(): Observable<any> {
+        return this.http.get(this.baseUrl + "/user/connections");
     }
 }

@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LoginLogoutActions } from '../../store/login.actions';
-import { loggedInUser, selectLoginError } from '../../store/login.selectors';
+import { loggedInUser, selectLoginError } from '../../store/user/user.selectors';
+import { UserActions } from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     console.log("this.loginForm:", this.loginForm)
     let emailId = this.loginForm.controls['emailId'].value || "";
     let password = this.loginForm.controls['password'].value || "";
-    this.store.dispatch(LoginLogoutActions.addUser({ emailId: emailId, password: password }));
+    this.store.dispatch(UserActions.addUser({ emailId: emailId, password: password }));
     this.router.navigate(['/feed']);
 
 

@@ -13,16 +13,16 @@
                 </div>
 
             </div>
-            <!-- <span class="bg-white">{{loggedInuserName }}</span> -->
 
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-white rounded-box z-1 mt-3 w-52 p-2 shadow">
                 <li>
                     <a class="justify-between" routerLink="profileUpdate">
                         Profile
-                        <!-- <span class="badge">New</span> -->
                     </a>
                 </li>
-                <li><a>Settings</a></li>
+                <li><a class="justify-between" (click)="connections()">
+                    Connections
+                </a></li>
                 <li><a (click)="logout()">Logout</a></li>
             </ul>
         </div>
