@@ -10,9 +10,6 @@ import { loggedInUser } from '../../store/user/user.selectors';
   imports: [ReactiveFormsModule],
   templateUrl: './update-profile.component.html',
   styleUrl: './update-profile.component.css',
-  // providers: [
-  //     provideStore({ UpdateProfile: updateProfilereducer }),
-  //     provideEffects(UpdateProfileEffects)]
 })
 export class UpdateProfileComponent implements OnInit {
   updateProfileForm!: FormGroup;
@@ -32,7 +29,6 @@ export class UpdateProfileComponent implements OnInit {
     });
 
     this.user.subscribe(store => {
-      console.log("logged in user details in update profile:", store)
       this.loggedInuserDetails = store;
     });
   }

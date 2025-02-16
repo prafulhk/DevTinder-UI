@@ -22,7 +22,25 @@ export class ConfigService {
         return this.http.patch(this.baseUrl + "/user/profile/update", { userId, firstName, lastName, sex, dob });
     }
 
+    fetchFeed(): Observable<any> {
+        return this.http.get(this.baseUrl + "/feed");
+    }
+
     fetchConnections(): Observable<any> {
         return this.http.get(this.baseUrl + "/user/connections");
     }
+
+    fetchRecievedRequests(): Observable<any> {
+        return this.http.get(this.baseUrl + "/user/request/recieved");
+    }
+
+    sendRequest(status: string, fromUserId: string): Observable<any> {
+        return this.http.post(this.baseUrl + "/request/send/" + status + "/" + fromUserId, {});
+    }
+
+    reviewRequest(status: string, requestId: string): Observable<any> {
+        return this.http.post(this.baseUrl + "/request/review/" + status + "/" + requestId, {});
+    }
+
+
 }

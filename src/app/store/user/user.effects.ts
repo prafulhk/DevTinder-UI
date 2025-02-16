@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ConfigService } from '../../config/config.service';
-import { ConnectionActions, ConnectionApiActions, UserActions, UserApiActions } from './user.actions';
+import { UserActions, UserApiActions } from './user.actions';
+import { of } from 'rxjs';
 
 
 
@@ -19,7 +20,7 @@ export class UserEffects {
       mergeMap((action: any) =>
         this.ConfigService.login(action.emailId, action.password).pipe(
           map(data => UserApiActions.addUserSuccess(data)),
-          // catchError(error => of(LoginApiActions.addUserFailure( error)))
+          catchError(error => of(UserApiActions.addUserFailure(error)))
         )
       )
     )
@@ -31,7 +32,6 @@ export class UserEffects {
       mergeMap((action: any) =>
         this.ConfigService.logout(action.emailId).pipe(
           map(data => UserApiActions.removeUserSuccess(data)),
-          // catchError(error => of(LogoutApiActions.removeUSerFailure({ error })))
         )
       )
     )
@@ -43,17 +43,6 @@ export class UserEffects {
         mergeMap((action: any) =>
           this.ConfigService.updateProfile(action.userId,action.firstName, action.lastName, action.sex, action.dob).pipe(
             map(data => UserApiActions.updateProfileSuccess(data))
-          )
-        )
-      )
-    );
-
-    connection$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(ConnectionActions.addConnections),
-        mergeMap((action: any) =>
-          this.ConfigService.fetchConnections().pipe(
-            map(data => ConnectionApiActions.addConnectionsSuccess(data))
           )
         )
       )

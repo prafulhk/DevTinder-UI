@@ -1,15 +1,15 @@
-@for (item of requestRecieved; track item._id) {
+@for (item of feedData?.data; track item._id) {
 <div class="h-100 mb-3">
     <div class="card bg-base-100 w-96 shadow-xl">
         <figure>
-
+            
         </figure>
         <div class="card-body">
             <h2 class="card-title">{{item.firstName}}</h2>
             <!-- <p>If a dog chews shoes whose shoes does he choose?</p> -->
             <div class="card-actions justify-end">
-                <button class="btn btn-secondary" (click)="reviewRequest('accepted',item._id)">Accept</button>
-                <button class="btn btn-primary" (click)="reviewRequest('rejected',item._id)">Reject</button>
+                <button class="btn btn-secondary" (click)="sendRequest('interested',item._id)">Interested</button>
+                <button class="btn btn-primary" (click)="sendRequest('ignored',item._id)">Ignored</button>
             </div>
         </div>
     </div>

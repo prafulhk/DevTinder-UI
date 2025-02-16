@@ -1,7 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 export const UserActions = createActionGroup({
-  source: 'User',
+  source: 'Login',
   events: {
     'Add User': props<{ emailId: string, password: string }>(),
     'Remove User': props<{ user: {} }>(),
@@ -13,22 +13,15 @@ export const UserApiActions = createActionGroup({
   source: 'Login API',
   events: {
     'Add User Success': props<{ data: any[] }>(),
+    'Add User Failure': props<{ error: any }>(),
     'Remove User Success': props<{ data: [] }>(),
     'Update Profile Success': props<{ data: any[] }>(),
-    'Add Connections Success': props<{ data: any[] }>(),
   },
 });
 
-export const ConnectionActions = createActionGroup({
-  source: 'Connections',
+export const LogoutActions = createActionGroup({
+  source: 'Logout',
   events: {
-    'Add Connections':emptyProps,
+    'Logout User': emptyProps
   }
-});
-
-export const ConnectionApiActions = createActionGroup({
-  source: 'Connections API',
-  events: {
-    'Add Connections Success': props<{ data: any[] }>(),
-  },
 });

@@ -38,6 +38,7 @@
                                 }
                         </div>
                         <div class="text-red-600 space-y-2">{{loggedInuserErrorDetails?.message}}</div>
+                        <div class="text-red-600 space-y-2" *ngIf="error$ | async as error">{{ error?.message }}</div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <input id="remember_me" name="remember_me" type="checkbox"

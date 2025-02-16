@@ -1,8 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ConfigService } from '../../config/config.service';
 import { Observable } from 'rxjs';
-import { loggedInUser } from '../../store/user/user.selectors';
 import { Store } from '@ngrx/store';
+import { ReceivedRequestActions } from '../../store/requests/requests.actions';
+import { selectAllFeeds } from '../../store/feed/feed.selectors';
+import { selectConnections } from '../../store/requests/requests.selectors';
 
 @Component({
   selector: 'app-connections',
@@ -10,25 +11,26 @@ import { Store } from '@ngrx/store';
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'
 })
+
 export class ConnectionsComponent implements OnInit {
-  private ConfigService = inject(ConfigService);
   private store = inject(Store)
-  user: Observable<any> = this.store.select(loggedInUser);
-  loggedInuserDetails: any;
+  feedsFromStore: Observable<any> = this.store.select(selectAllFeeds);
+  feeds: any;
+  connections:any;
 
   ngOnInit(): void {
-    this.user.subscribe(store => {
-      console.log("logged in user details login:", store)
-      this.loggedInuserDetails = store;
+    this.store.dispatch(ReceivedRequestActions.addConnectionRequest());
+    this.feedsFromStore.subscribe(store => {
+      this.feeds = store;
+    });
+
+    this.store.select(selectConnections).subscribe(res => {
+      let connections = res;
+      if (connections.length>0) {
+        this.connections = this.feeds?.data?.filter((item: { _id: any; })=>connections.includes(item._id))
+      }
     });
   }
 
-  sendConnections(status: string) {
-    // this.ConfigService.fetchConnections(status, this.loggedInuserDetails._id.toString()).subscribe(res => {
-    //   if (res) {
-    //     console.log(res)
-    //   }
-    // })
-  }
 
 }

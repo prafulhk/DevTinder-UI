@@ -1,3 +1,4 @@
+import { RequestRecievedComponent } from './components/request-recieved/request-recieved.component';
 import { Routes } from '@angular/router';
 import { FeedComponent } from './components/feed/feed.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -20,6 +21,9 @@ export const routes: Routes = [
     },
     {
         path: "profileUpdate", component: UpdateProfileComponent
+    },
+    {
+        path: "requests", component: RequestRecievedComponent
     },
     {
         path: "connections", component: ConnectionsComponent

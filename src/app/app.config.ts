@@ -10,7 +10,11 @@ import { provideEffects } from '@ngrx/effects';
 import { userReducer } from './store/user/user.reducer';
 import { UserEffects } from './store/user/user.effects';
 import { authInterceptor } from './services/auth.interceptor';
-
+import { receivedRequestReducer } from './store/requests/requests.reducer';
+import { RequestsEffects } from './store/requests/requests.effects';
+import { feedReducer } from './store/feed/feed.reducer';
+import { FeedEffects } from './store/feed/feed.effects';
+import { metaReducers } from './store/meta-reducer';
 export const appConfig: ApplicationConfig = {
   providers:
     [
@@ -22,8 +26,13 @@ export const appConfig: ApplicationConfig = {
       provideRouter(routes),
       importProvidersFrom(HttpClientModule),
       ConfigService,
-      provideStore({ userDetails: userReducer }),
-      provideEffects(UserEffects),
+      provideStore({
+        userDetails: userReducer,
+        feeds:feedReducer,
+        recievedRequests: receivedRequestReducer
+      },
+      { metaReducers }),
+      provideEffects(UserEffects,RequestsEffects,FeedEffects),
       provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     ]
 };

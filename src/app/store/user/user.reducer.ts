@@ -1,29 +1,48 @@
 import { createReducer, on } from '@ngrx/store';
-import { ConnectionActions, ConnectionApiActions, UserActions, UserApiActions } from './user.actions';
+import { UserActions, UserApiActions } from './user.actions';
 
 export const loginFeatureKey = 'userDetails';
 
-export const initialState: ReadonlyArray<any> = [{ emailId: 'virat@gmail.com', password: 'Pradhaani@1' }];
+
+export interface userState {
+  data?: any;
+  error?: any;
+
+}
+
+export const initialState: userState = {
+  data:null,
+  error:null
+};
+
 
 export const userReducer = createReducer(
   initialState,
 
-  on(UserActions.addUser, (state, data) => {
-    return [...state, data];
+  // on(UserActions.addUser, (state, data) => {
+  //   return {...state, data};
+  // }),
+
+  on(UserActions.removeUser, () => {
+    return {};
   }),
 
-  on(UserActions.removeUser, (state, data) => {
-    return [];
-  }),
 
-  on(UserApiActions.addUserSuccess, (_state, { data }) => data),
+  on(UserApiActions.addUserSuccess, (state, { data }) => ({
+    ...state,
+    data,
+    error:null
+  })),
 
-  on(UserApiActions.updateProfileSuccess, (_state, { data }) => data),
+  on(UserApiActions.addUserFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
 
-  on(ConnectionActions.addConnections, (state, data) => {
-    return [...state, data];
-  }),
-
-  on(ConnectionApiActions.addConnectionsSuccess, (_state, { data }) => data),
+  on(UserApiActions.updateProfileSuccess, (state, { data }) => ({
+    ...state,
+    data,
+    error: null
+  })),
 
 );
