@@ -19,7 +19,7 @@ export class RequestRecievedComponent implements OnInit {
   feedsFromStore: Observable<any> = this.store.select(selectAllFeeds);
   requests: any;
   feeds: any;
-  requestRecieved:any;
+  requestRecieved:any = [];
   private ConfigService = inject(ConfigService);
   constructor() { }
 
@@ -42,5 +42,4 @@ export class RequestRecievedComponent implements OnInit {
     this.ConfigService.reviewRequest(status,reqId.toString()).subscribe();
     this.store.dispatch(ReceivedRequestActions.removeRecievedRequest({id:reqId.toString()}));
   }
-
 }

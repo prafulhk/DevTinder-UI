@@ -17,7 +17,7 @@ export class ConnectionsComponent implements OnInit {
   private store = inject(Store)
   feedsFromStore: Observable<any> = this.store.select(selectAllFeeds);
   feeds: any;
-  connections:any;
+  connections:any=[];
 
   ngOnInit(): void {
     this.store.dispatch(ReceivedRequestActions.addConnectionRequest());
