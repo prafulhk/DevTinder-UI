@@ -1,15 +1,15 @@
-<div class="navbar bg-neutral">
+<div class="navbar bg-neutral h-10">
     <div class="flex-1 text-neutral-content">
-        <a class="btn btn-ghost text-xl" routerLink="feed">daisyUI</a>
+        <a class="btn btn-ghost text-xl" routerLink="feed">Dev Tinder</a>
     </div>
     @if((loggedInuserDetails?.data?.emailId)){
-    <p class="text-white">{{loggedInuserDetails?.data?.firstName}}</p>
+    <p class="text-white">{{loggedInuserDetails?.data?.firstName | titlecase}} </p>
     <div class="flex-none">
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar flex">
                 <div class="w-10 rounded-full">
-                    <img alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                    <img alt="Tailwind CSS Navbar component"  
+                        src={{loggedInuserDetails?.data?.photoURL}} />
 
                 </div>
 

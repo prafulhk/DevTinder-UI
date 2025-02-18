@@ -5,10 +5,11 @@ import {  Observable } from 'rxjs';
 import { selectAllFeeds } from '../../store/feed/feed.selectors';
 import { selectAllRequests } from '../../store/requests/requests.selectors';
 import { ConfigService } from '../../config/config.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-request-recieved',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './request-recieved.component.html',
   styleUrl: './request-recieved.component.css'
 })

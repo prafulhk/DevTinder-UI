@@ -41,7 +41,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.updateProfile),
         mergeMap((action: any) =>
-          this.ConfigService.updateProfile(action.userId,action.firstName, action.lastName, action.sex, action.dob).pipe(
+          this.ConfigService.updateProfile(action).pipe(
             map(data => UserApiActions.updateProfileSuccess(data))
           )
         )

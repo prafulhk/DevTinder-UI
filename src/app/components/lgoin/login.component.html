@@ -5,26 +5,40 @@
             <div class="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
                 <div class="self-start hidden lg:flex flex-col  text-white">
                     <img src="" class="mb-3">
-                    <h1 class="mb-3 font-bold text-5xl">Hi ? Welcome Back Aji </h1>
-                    <p class="pr-3">Lorem ipsum is placeholder text commonly used in the graphic, print,
-                        and publishing industries for previewing layouts and visual mockups</p>
+                    <h1 class="mb-3 font-bold text-5xl">Welcome to Dev Tinder </h1>
                 </div>
             </div>
             <div class="flex justify-center self-center  z-10">
-                <div class="p-12 bg-white mx-auto rounded-2xl w-100 ">
-                    <div class="mb-4">
-                        <h3 class="font-semibold text-2xl text-gray-800">Sign In </h3>
-                        <p class="text-gray-500">Please sign in to your account.</p>
+                <div class="p-6 bg-white mx-auto rounded-2xl w-100 ">
+                    <div class="mb-3">
+                        <h3 class="font-semibold text-2xl text-gray-800">{{signupUser ? "Sign In" : "Sign Up" }}</h3>
+                        <p class="text-gray-500">{{signupUser ?
+                            "Please sign in to your account." :
+                            "Please sign up to your account." }}</p>
                     </div>
-                    <div class="space-y-5">
+                    <div class="space-y-2">
+                        <div *ngIf="!signupUser" class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700 tracking-wide">First Name</label>
+                            <input formControlName="firstName"
+                                class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none"
+                                type="" placeholder="First Name">
+
+                        </div>
+                        <div *ngIf="!signupUser" class="space-y-2">
+                            <label class="text-sm font-medium text-gray-700 tracking-wide">Last Name</label>
+                            <input formControlName="lastName"
+                                class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none"
+                                type="" placeholder="Last Name">
+
+                        </div>
                         <div class="space-y-2">
                             <label class="text-sm font-medium text-gray-700 tracking-wide">Email</label>
                             <input formControlName="emailId"
                                 class=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none"
                                 type="" placeholder="mail@gmail.com">
-                            @if(!loginForm.controls['emailId'].valid && loginForm.controls['emailId'].dirty){
-                                <small class="text-red-600"> Email is required</small>
-                            }
+                            <div class="text-red-600"
+                                *ngIf="!loginForm.controls['emailId'].valid && loginForm.controls['emailId'].dirty">
+                                Email is required</div>
                         </div>
                         <div class="space-y-2">
                             <label class="mb-5 text-sm font-medium text-gray-700 tracking-wide">
@@ -33,12 +47,12 @@
                             <input formControlName="password"
                                 class="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-non"
                                 type="password" placeholder="Enter your password">
-                                @if(!loginForm.controls['password'].valid && loginForm.controls['password'].dirty){
-                                    <small class="text-red-600"> Password is required</small>
-                                }
+                            <div class="text-red-600"
+                                *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].dirty">
+                                Password is required</div>
                         </div>
-                        <div class="text-red-600 space-y-2">{{loggedInuserErrorDetails?.message}}</div>
-                        <div class="text-red-600 space-y-2" *ngIf="error$ | async as error">{{ error?.message }}</div>
+                        <div class="text-red-600">{{loggedInuserErrorDetails?.message}}</div>
+                        <div class="text-red-600" *ngIf="error$ | async as error">{{ error?.message }}</div>
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
                                 <input id="remember_me" name="remember_me" type="checkbox"
@@ -47,25 +61,22 @@
                                     Remember me
                                 </label>
                             </div>
-                            <div class="text-sm">
+                            <div class="text-sm" *ngIf="signupUser">
                                 <a href="#" class="text-green-400 hover:text-green-500">
                                     Forgot your password?
                                 </a>
                             </div>
                         </div>
                         <div>
-                            <button type="submit" [disabled] ="!loginForm.valid"
-                                class="btn-primary w-full flex text-white justify-center  rounded-full  cursor-pointer disabled:bg-gray-300" 
-                                (click)="login()">
-                                Sign in
+                            <button type="submit" [disabled]="!loginForm.valid"
+                                class="btn-primary w-full flex text-white justify-center  rounded-full  cursor-pointer disabled:bg-gray-300"
+                                (click)="login(signupUser ? 'login' : 'signup')">
+                                {{signupUser ? "Sign in" : "Sign up"}}
                             </button>
                         </div>
-                    </div>
-                    <div class="pt-5 text-center text-gray-400 text-xs">
-                        <span>
-                            Copyright © 2021-2022
-                            <a href="https://codepen.io/uidesignhub" rel="" target="_blank" title="Ajimon"
-                                class="text-green hover:text-green-500 ">AJI</a></span>
+                        <p class="m-auto cursor-pointer py-2" (click)="signupUser = !signupUser">
+                            {{signupUser ? "New User? Signup Here" : "Existing User? Login Here"}}
+                        </p>
                     </div>
                 </div>
             </div>

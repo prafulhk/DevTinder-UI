@@ -1,17 +1,20 @@
-@for (item of feedData?.data; track item._id) {
-<div class="h-100 mb-3">
-    <div class="card bg-base-100 w-96 shadow-xl">
-        <figure>
-            
-        </figure>
-        <div class="card-body">
-            <h2 class="card-title">{{item.firstName}}</h2>
-            <!-- <p>If a dog chews shoes whose shoes does he choose?</p> -->
-            <div class="card-actions justify-end">
-                <button class="btn btn-secondary" (click)="sendRequest('interested',item._id)">Interested</button>
-                <button class="btn btn-primary" (click)="sendRequest('ignored',item._id)">Ignored</button>
+<div class="mt-3 flex flex-col justify-center items-center">
+    @for (item of feedData?.data; track item._id) {
+    <div class="mt-3 mb-3">
+        <div class="card bg-base-100 w-96 shadow-xl">
+            <figure>
+                <img src={{item.photoURL}} alt="item.firstName" />
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title">{{item.firstName | titlecase}} {{item.lastName | titlecase}}</h2>
+                <p>{{item.about}}</p>
+                <span>{{item.skills}}</span>
+                <div class="card-actions justify-end">
+                    <button class="btn btn-secondary" (click)="sendRequest('interested',item._id)">Interested</button>
+                    <button class="btn btn-primary" (click)="sendRequest('ignored',item._id)">Ignored</button>
+                </div>
             </div>
         </div>
     </div>
+    }
 </div>
-}

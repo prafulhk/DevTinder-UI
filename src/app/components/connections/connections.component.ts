@@ -4,10 +4,11 @@ import { Store } from '@ngrx/store';
 import { ReceivedRequestActions } from '../../store/requests/requests.actions';
 import { selectAllFeeds } from '../../store/feed/feed.selectors';
 import { selectConnections } from '../../store/requests/requests.selectors';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-connections',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './connections.component.html',
   styleUrl: './connections.component.css'
 })

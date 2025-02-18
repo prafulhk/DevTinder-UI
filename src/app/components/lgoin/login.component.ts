@@ -7,6 +7,7 @@ import { loggedInUser, selectUserError } from '../../store/user/user.selectors';
 import { UserActions } from '../../store/user/user.actions';
 import { FeedActions } from '../../store/feed/feed.actions';
 import { CommonModule } from '@angular/common';
+import { ConfigService } from '../../config/config.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
   private router = inject(Router);
-  private store = inject(Store)
+  private store = inject(Store);
+  private configService = inject(ConfigService)
   user: Observable<any> = this.store.select(loggedInUser);
   loggedInuserDetails: any;
   loginForm!: FormGroup;
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   error$: Observable<any> = this.store.pipe(select(selectUserError));
   errorSubscription: any;
   private destroy$ = new Subject<void>();
+  signupUser: boolean = true;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -37,34 +40,32 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.minLength(4), Validators.required]],
     });
     this.error$.subscribe(data => {
-      console.log("data:", data)
       this.errorSubscription = data
     });
   }
 
-  login() {
-    let emailId = this.loginForm.controls['emailId'].value || "";
-    let password = this.loginForm.controls['password'].value || "";
+  login(action:string) {
+    const { emailId, password } = this.loginForm.value;
+
+    if(action === 'signup') {
+      this.configService.signup(this.loginForm.value).subscribe();
+    }
+    else{
     this.store.dispatch(UserActions.addUser({ emailId: emailId, password: password }));
-
-    this.user.pipe(
-      takeUntil(this.destroy$),
-      distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
-      filter(store => store && store.data && store.data.emailId)
-    ).subscribe(store => {
-      this.loggedInuserDetails = store;
-      console.log("this.loggedInuserDetails from store:", this.loggedInuserDetails);
-      console.log("form:", this.loginForm);
-      this.store.dispatch(FeedActions.addFeed());
-      this.router.navigate(['/feed']);
-    });
-
+      this.user.pipe(
+        takeUntil(this.destroy$),
+        distinctUntilChanged((prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)),
+        filter(store => store && store.data && store.data.emailId)
+      ).subscribe(store => {
+        this.loggedInuserDetails = store;
+        this.store.dispatch(FeedActions.addFeed());
+        this.router.navigate(['/feed']);
+      });
+    }
+    this.loginForm.reset();
   }
 
   ngOnDestroy() {
-    // if (this.userSubscription) {
-    //   this.userSubscription.unsubscribe();
-    // }
     this.destroy$.next();
     this.destroy$.complete();
   }

@@ -5,10 +5,11 @@ import { Observable, Subject } from 'rxjs';
 import { ConfigService } from '../../config/config.service';
 import { selectAllFeeds } from '../../store/feed/feed.selectors';
 import { FeedActions } from '../../store/feed/feed.actions';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-card',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.css'
 })

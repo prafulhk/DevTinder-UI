@@ -5,10 +5,11 @@ import { Router, RouterLink } from '@angular/router';
 import { LoginComponent } from '../lgoin/login.component';
 import { loggedInUser } from '../../store/user/user.selectors';
 import { LogoutActions, UserActions } from '../../store/user/user.actions';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [LoginComponent, RouterLink],
+  imports: [LoginComponent, RouterLink,CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   loggedInuserDetails: any;
   userSubscription: any;
   private router = inject(Router);
-
+  defaultPhoto = "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp";
   ngOnInit() {
     this.userSubscription = this.user.subscribe(store => {
       this.loggedInuserDetails = store;
@@ -32,7 +33,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.store.dispatch(LogoutActions.logoutUser());
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('/');
   }
 
   ngOnDestroy() {

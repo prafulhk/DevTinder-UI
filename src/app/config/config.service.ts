@@ -10,6 +10,11 @@ export class ConfigService {
     private baseUrl: string = this.localBaseURL;
     constructor(private http: HttpClient) { }
 
+    signup(signupForm:any): Observable<any> {
+        const {firstName,lastName,emailId,password} = signupForm;
+        return this.http.post(this.baseUrl + "/signup", {firstName,lastName,emailId,password});
+    }
+
     login(emailId: string, password: string): Observable<any> {
         return this.http.post(this.baseUrl + "/login", { emailId, password });
     }
@@ -18,8 +23,12 @@ export class ConfigService {
         return this.http.post(this.baseUrl + "/logout", { emailId });
     }
 
-    updateProfile(userId: string, firstName: string, lastName: string, sex: string, dob: string): Observable<any> {
-        return this.http.patch(this.baseUrl + "/user/profile/update", { userId, firstName, lastName, sex, dob });
+    // updateProfile(userId: string, firstName: string, lastName: string, gender: string, dob: string,photoURL:String): Observable<any> {
+    //     return this.http.patch(this.baseUrl + "/user/profile/update", { userId, firstName, lastName, gender, dob,photoURL },{ withCredentials: true });
+    // }
+
+    updateProfile(profileForm:any): Observable<any> {
+        return this.http.patch(this.baseUrl + "/user/profile/update", profileForm,{ withCredentials: true });
     }
 
     fetchFeed(): Observable<any> {
