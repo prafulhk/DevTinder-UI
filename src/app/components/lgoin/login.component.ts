@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   errorSubscription: any;
   private destroy$ = new Subject<void>();
   signupUser: boolean = true;
-
+  forgotPasswordFlag: boolean = false;
   constructor(private formBuilder: FormBuilder) { }
 
 
@@ -63,6 +63,11 @@ export class LoginComponent implements OnInit {
       });
     }
     this.loginForm.reset();
+  }
+
+  forgotPassword(){
+    this.forgotPasswordFlag = true;
+    this.router.navigate(['/forgotPassword']);
   }
 
   ngOnDestroy() {

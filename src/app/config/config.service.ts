@@ -23,10 +23,6 @@ export class ConfigService {
         return this.http.post(this.baseUrl + "/logout", { emailId });
     }
 
-    // updateProfile(userId: string, firstName: string, lastName: string, gender: string, dob: string,photoURL:String): Observable<any> {
-    //     return this.http.patch(this.baseUrl + "/user/profile/update", { userId, firstName, lastName, gender, dob,photoURL },{ withCredentials: true });
-    // }
-
     updateProfile(profileForm:any): Observable<any> {
         return this.http.patch(this.baseUrl + "/user/profile/update", profileForm,{ withCredentials: true });
     }
@@ -51,5 +47,12 @@ export class ConfigService {
         return this.http.post(this.baseUrl + "/request/review/" + status + "/" + requestId, {});
     }
 
+    sendEmailWithOTP(to: string, otp: string): Observable<any> {
+        return this.http.post(this.baseUrl + "/sendEmail", { to, otp });
+    }
+
+    resetPassword(emailId: string, newPassword: string): Observable<any> {
+        return this.http.patch(this.baseUrl + "/user/profile/resetPassword//", {emailId,newPassword});
+    }
 
 }

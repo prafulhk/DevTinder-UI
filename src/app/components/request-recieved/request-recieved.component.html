@@ -3,7 +3,7 @@
     <div class="h-100 mb-3">
         <div class="card bg-base-100 w-96 shadow-xl">
             <figure>
-                <img src={{item.photoURL}} alt="item.firstName" />
+                <img class="w-full h-56 object-cover" [src]="item.photoURL" [alt]="item.firstName" />
             </figure>
             <div class="card-body">
                 <h2 class="card-title">{{item.firstName | titlecase}} {{item.lastName | titlecase}}</h2>

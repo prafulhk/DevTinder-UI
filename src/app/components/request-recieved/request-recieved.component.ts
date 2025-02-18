@@ -30,7 +30,7 @@ export class RequestRecievedComponent implements OnInit {
     });
     this.store.select(selectAllRequests).subscribe(requests => {
       this.requests = requests;
-      if (this.requests?.data) {
+      if (this.requests?.data?.length>0) {
        this.requestRecieved = this.feeds?.data?.filter((feeds: { _id: any; })=>this.requests?.data?.some((item: { fromUserId: any; })=>item.fromUserId==feeds._id))
       }
     });

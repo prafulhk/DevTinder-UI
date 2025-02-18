@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" *ngIf="!forgotPasswordFlag">
     <div class="  bg-center"
         style="background-image: url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1951&amp;q=80);">
         <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
@@ -62,7 +62,7 @@
                                 </label>
                             </div>
                             <div class="text-sm" *ngIf="signupUser">
-                                <a href="#" class="text-green-400 hover:text-green-500">
+                                <a class="text-green-400 hover:text-green-500" (click)="forgotPassword()">
                                     Forgot your password?
                                 </a>
                             </div>
