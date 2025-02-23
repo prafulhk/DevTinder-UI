@@ -6,6 +6,7 @@ import { selectAllFeeds } from '../../store/feed/feed.selectors';
 import { selectAllRequests } from '../../store/requests/requests.selectors';
 import { ConfigService } from '../../config/config.service';
 import { CommonModule } from '@angular/common';
+import { Feed } from '../../models/feeds.model';
 
 @Component({
   selector: 'app-request-recieved',
@@ -18,7 +19,7 @@ export class RequestRecievedComponent implements OnInit {
   requestsFromStore: Observable<any> = this.store.select(selectAllRequests);
   feedsFromStore: Observable<any> = this.store.select(selectAllFeeds);
   requests: any;
-  feeds: any;
+  feeds!: Feed;
   requestRecieved:any = [];
   private ConfigService = inject(ConfigService);
   constructor() { }

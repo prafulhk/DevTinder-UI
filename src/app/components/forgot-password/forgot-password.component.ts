@@ -43,9 +43,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   verifyOtp() {
     const enteredOTP = this.otpForm.value.firstDigit + this.otpForm.value.secondDigit + this.otpForm.value.thirdDigit + this.otpForm.value.fourthDigit;
-    console.log("otp form:", this.otpForm.value);
     if (enteredOTP === this.generatedOTP) {
-      console.log('OTP verified successfully');
       this.router.navigate(['/resetPassword']);
     }
     else{

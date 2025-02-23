@@ -1,10 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { FeedActions, FeedApiActions } from './feed.actions';
+import { Feed, Feeds } from '../../models/feeds.model';
 
 export const feedFeatureKey = 'feeds';
 
 export interface FeedState {
-  data: any;
+  data: Feeds[];
 }
 
 export const initialState: FeedState = {
@@ -14,11 +15,6 @@ export const initialState: FeedState = {
 
 export const feedReducer = createReducer(
   initialState,
-
-  // on(FeedActions.addFeed, (state, data) => ({
-  //   ...state,
-  //   feeds: [...state.feeds, data]
-  // })),
 
   on(FeedApiActions.addFeedSuccess, (state, { data }) => ({
     ...state,

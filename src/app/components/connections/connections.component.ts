@@ -5,6 +5,7 @@ import { ReceivedRequestActions } from '../../store/requests/requests.actions';
 import { selectAllFeeds } from '../../store/feed/feed.selectors';
 import { selectConnections } from '../../store/requests/requests.selectors';
 import { CommonModule } from '@angular/common';
+import { Feed, Feeds } from '../../models/feeds.model';
 
 @Component({
   selector: 'app-connections',
@@ -16,8 +17,8 @@ import { CommonModule } from '@angular/common';
 export class ConnectionsComponent implements OnInit {
   private store = inject(Store)
   feedsFromStore: Observable<any> = this.store.select(selectAllFeeds);
-  feeds: any;
-  connections:any=[];
+  feeds!: Feed;
+  connections:Feeds[] = [];
 
   ngOnInit(): void {
     this.store.dispatch(ReceivedRequestActions.addConnectionRequest());
@@ -28,10 +29,8 @@ export class ConnectionsComponent implements OnInit {
     this.store.select(selectConnections).subscribe(res => {
       let connections = res;
       if (connections.length>0) {
-        this.connections = this.feeds?.data?.filter((item: { _id: any; })=>connections.includes(item._id))
+        this.connections = this.feeds?.data?.filter((item)=>connections.includes(item._id))
       }
     });
   }
-
-
 }

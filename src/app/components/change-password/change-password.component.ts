@@ -30,7 +30,7 @@ export class ChangePasswordComponent implements OnInit {
       catchError((error: any) => {
         console.error('Error changing password', error);
         this.showToaster = false;
-        return of(null); // Return an observable to complete the stream
+        return of(null);
       })
     ).subscribe(
       res => {

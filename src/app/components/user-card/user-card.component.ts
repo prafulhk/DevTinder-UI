@@ -18,13 +18,9 @@ export class UserCardComponent implements OnInit {
   private ConfigService = inject(ConfigService);
   @Input() feedData: any;
   feeds: Observable<any> = this.store.select(selectAllFeeds);
-  // feedSubscription: any;
   private destroy$ = new Subject<void>();
 
   ngOnInit() {
-    // this.feedSubscription =  this.feeds.subscribe(store => {
-    //   this.feedData = store;
-    // });
     this.feeds.pipe(takeUntil(this.destroy$)).subscribe(store => {
       this.feedData = store;
     });
@@ -37,9 +33,6 @@ export class UserCardComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    // if (this.feedSubscription) {
-    //   this.feedSubscription.unsubscribe();
-    // }
     this.destroy$.next();
     this.destroy$.complete();
   }
